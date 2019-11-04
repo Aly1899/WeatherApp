@@ -1,0 +1,38 @@
+<!-- <mat-card id="card" class="container"> -->
+  <!-- <mat-card-header> -->
+    <!-- <mat-card-title>Login</mat-card-title> -->
+<div class="container">
+
+  <div class="title">
+    <h1>Login</h1>
+  </div>
+  <!-- </mat-card-header> -->
+  <!-- <mat-card-content> -->
+    <form [formGroup]="loginForm" novalidate (ngSubmit)="loginForm.value">
+        <!-- <table class="example-full-width" cellspacing="0">
+          <tr>
+            <td> -->
+              <mat-form-field class="name">
+                <input matInput placeholder="Username" formControlName="userName" name="userName" required>
+              </mat-form-field>
+            <!-- </td>
+          </tr>
+          <tr> -->
+          <!-- <td> -->
+            <mat-form-field class="password">
+              <input matInput placeholder="Password" formControlName="password" type="password" name="password" required>
+            </mat-form-field>
+            <!-- </td>
+            </tr></table> -->
+          </form>
+          <span class="invalidPassword" *ngIf="!isValidPassword">Incorrect password</span>
+      <!-- <mat-spinner [style.display]="showSpinner ? 'block' : 'none'"></mat-spinner> -->
+      <!-- </mat-card-content> -->
+    <!-- <mat-card-actions> -->
+      <button mat-raised-button (click)="login()" color="primary">Login</button>
+      <!-- </mat-card-actions> -->
+    </div>
+
+
+
+

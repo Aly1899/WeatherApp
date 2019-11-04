@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="message" mat-dialog-content>
+      {{message}}
+    </div >
+      <mat-form-field>
+        <input matInput [(ngModel)]="city" placeholder="City name">
+      </mat-form-field>
+    <div class="btn" mat-dialog-actions>
+      <button mat-raised-button mat-button (click)="onNoClick()" color="warn">Cancel</button>
+      <button mat-raised-button mat-button [mat-dialog-close]="city" color="primary" cdkFocusInitial>Add</button>
+    </div>
+  </div>
