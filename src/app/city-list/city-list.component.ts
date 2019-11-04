@@ -63,9 +63,11 @@ export class CityListComponent implements OnInit, AfterViewInit {
       if (result) {
         console.log('the result is', result);
         this.userService.addCity(result);
-        debugger;
         this.weatherService.getWeatherCurrent(result)
-          .subscribe(data=>console.log('ERROR HANDLER: ', data));
+          .subscribe(data=>data,
+            (error) => {
+              console.log(error);
+            });
         this.selectedIndex--;
         this.router.navigate(['/weather']);
         console.log('Selected index -->',this.selectedIndex);

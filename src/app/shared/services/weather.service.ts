@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError, } from 'rxjs';
+import { Observable, throwError, of, } from 'rxjs';
 import { map, tap, catchError } from 'rxjs/operators';
 import { City, Forecast } from 'src/app/interfaces/city.model';
 
@@ -28,11 +28,7 @@ export class WeatherService {
             this.cityDetails.windSpeed = res.wind.speed;
             return this.cityDetails;
           }),
-          catchError(err => {
-            console.log('valami');
-            return throwError(err);
-            // this.errorObs
-          })
+          catchError(err => {throw new Error('No such city'); })
         )
       ;
   }
@@ -48,7 +44,8 @@ export class WeatherService {
           forecastArray.push({name: new Date(item.dt_txt), value: item.main.temp});
         })
         return forecastArray;
-      })
+      }),
+      catchError(err => of(`I caugth ${err}`))
     );
   }
 
