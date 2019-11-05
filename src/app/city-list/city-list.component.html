@@ -1,4 +1,3 @@
-{{selectedIndex}}
 <mat-tab-group mat-align-tabs="start" [selectedIndex]="selectedIndex" (selectedTabChange)="onTabChange($event)" #tabGroup>
     <mat-tab *ngFor="let city of cities, let i=index" label={{city}}>
       <app-city *ngIf="selectedIndex===i" [city]="city"></app-city>

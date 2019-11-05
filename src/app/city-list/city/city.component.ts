@@ -20,9 +20,8 @@ export class CityComponent implements OnInit, AfterViewInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Number';
   showYAxisLabel = true;
-  yAxisLabel = 'Color Value';
+  yAxisLabel = 'Temperature (℃)';
   timeline = false;
   autoScale = true;
   colorScheme = {

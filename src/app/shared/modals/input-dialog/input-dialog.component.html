@@ -2,11 +2,14 @@
     <div class="message" mat-dialog-content>
       {{message}}
     </div >
-      <mat-form-field>
-        <input matInput [(ngModel)]="city" placeholder="City name">
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput [(ngModel)]="city" placeholder="City name">
+    </mat-form-field>
+    <div class="error-message" *ngIf="isInvalidCity">
+      <p>Invalid city name</p>
+    </div>
     <div class="btn" mat-dialog-actions>
       <button mat-raised-button mat-button (click)="onNoClick()" color="warn">Cancel</button>
-      <button mat-raised-button mat-button [mat-dialog-close]="city" color="primary" cdkFocusInitial>Add</button>
+      <button mat-raised-button mat-button (click)="onAddClick()" color="primary" cdkFocusInitial>Add</button>
     </div>
   </div>

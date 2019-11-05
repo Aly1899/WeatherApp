@@ -18,7 +18,7 @@ export class CityListComponent implements OnInit, AfterViewInit {
   cityName: string;
   activeUser: User;
   cities: string[];
-  selectedIndex = 0;
+  selectedIndex: number;
   constructor(
     public dialog: MatDialog,
     private userService: UserService,
@@ -26,6 +26,7 @@ export class CityListComponent implements OnInit, AfterViewInit {
     private weatherService: WeatherService) { }
 
   ngOnInit() {
+    this.weatherService.getSelectedTab().subscribe(index=>this.selectedIndex = index);
     console.log('list-component created: ', Date.now());
     this.activeUser = this.userService.activeUser;
     if (!this.activeUser){
@@ -45,11 +46,11 @@ export class CityListComponent implements OnInit, AfterViewInit {
   }
 
   onTabChange(event: MatTabChangeEvent){
-    if (event.tab.textLabel === ''){
-      this.selectedIndex = event.index+1;
-    } else {
-      this.selectedIndex = event.index;
-    }
+    // if (event.tab.textLabel === ''){
+    //   this.weatherService.setSelectedTab(event.index);
+    // } else {
+      this.weatherService.setSelectedTab(event.index);
+    // }
     console.log(event);
     console.log('Tab change index --> ', this.selectedIndex);
   }
@@ -62,22 +63,17 @@ export class CityListComponent implements OnInit, AfterViewInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('the result is', result);
-        this.userService.addCity(result);
-        this.weatherService.getWeatherCurrent(result)
-          .subscribe(data=>data,
-            (error) => {
-              console.log(error);
-            });
-        this.selectedIndex--;
-        this.router.navigate(['/weather']);
-        console.log('Selected index -->',this.selectedIndex);
+        this.userService.addCity(result.charAt(0).toUpperCase() + result.slice(1));
       }
     });
-  }
 
-  onClick(index: number){
-    this.selectedIndex = index;
-    console.log('Add change index --> ', this.selectedIndex)
-    this.openDialog();
+      }
+
+      onClick(index: number){
+        this.weatherService.setSelectedTab(index);
+        console.log('Add change index --> ', this.selectedIndex)
+        this.openDialog();
+        // this.selectedIndex--;
+        console.log('Selected index -->',this.selectedIndex);
   }
 }
